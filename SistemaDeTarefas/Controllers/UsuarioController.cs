@@ -20,14 +20,14 @@ namespace SistemaDeTarefas.Controllers
         [HttpGet]
         public async Task<ActionResult<List<UsuarioModel>>> BuscarTodosUsuarios()
         {
-            List<UsuarioModel> usuarios = await _usuarioRepositorio.BuscarTodosUsuarios();
+            var usuarios = await _usuarioRepositorio.BuscarTodosUsuarios();
             return Ok(usuarios);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuarioModel>> BuscarPorID(int id)
         {
-            UsuarioModel usuario = await _usuarioRepositorio.BuscarPorId(id);
+            var usuario = await _usuarioRepositorio.BuscarPorId(id);
             return Ok(usuario);
         }
 
@@ -36,6 +36,21 @@ namespace SistemaDeTarefas.Controllers
         {
             var usuario = await _usuarioRepositorio.Adicionar(usuarioModel);
             return Ok(usuario);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UsuarioModel>> Atualizar([FromBody] UsuarioModel usuarioModel, int id)
+        {
+            usuarioModel.Id = id;
+            var usuario = await _usuarioRepositorio.Atualizar(usuarioModel, id);
+            return Ok(usuario);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UsuarioModel>> Deletar(int id)
+        {
+            var usuarioApagado = await _usuarioRepositorio.Deletar(id);
+            return Ok(usuarioApagado);
         }
     }
 }
