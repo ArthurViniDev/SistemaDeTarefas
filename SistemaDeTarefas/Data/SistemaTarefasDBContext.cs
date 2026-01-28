@@ -6,7 +6,7 @@ namespace SistemaDeTarefas.Data
 {
     public class SistemaTarefasDBContext : DbContext
     {
-        SistemaTarefasDBContext(DbContextOptions<SistemaTarefasDBContext> options) : base(options)
+        public SistemaTarefasDBContext(DbContextOptions<SistemaTarefasDBContext> options) : base(options)
         {
 
         }
